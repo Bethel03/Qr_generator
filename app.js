@@ -57,3 +57,24 @@ downloadBtn.addEventListener("click", () => {
   link.download = "qrcode.png";
   link.click();
 });
+
+// Rendre en Noir et Blanc
+const bwBtn = document.getElementById("bw-btn");
+
+bwBtn.addEventListener("click", () => {
+  const text = input.value.trim();
+  if (!text) return;
+
+  QRCode.toDataURL(text, {
+    width: 300,
+    margin: 2,
+    color: {
+      dark: "#000000",  
+      light: "#ffffff"  
+    }
+  }).then(dataURL => {
+    image.src = dataURL;
+    qr_box.style.display = "block";
+    showToast("🎨 QR code en noir & blanc !");
+  }).catch(err => console.error(err));
+});

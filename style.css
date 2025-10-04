@@ -149,6 +149,21 @@ body {
   transform: translateY(0);
 }
 
+.qr-actions button {
+  padding: 0.5rem 1rem;
+  background: #000;
+  border: 2px solid #0ff;
+  color: #0ff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qr-actions button:hover {
+  background: #0ff;
+  color: #000;
+}
+
 /* Animation d’apparition */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.9); }
