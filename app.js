@@ -7,10 +7,28 @@ const copyBtn = document.getElementById("copy-btn");
 const downloadBtn = document.getElementById("download-btn");
 const colorDark = document.getElementById("color-dark");
 const colorLight = document.getElementById("color-light");
+let hideTimeout;
+
+function hideQR() {
+  if (qr_box.style.display !== "none" && !qr_box.classList.contains("hide")) {
+    qr_box.classList.add("hide");
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      qr_box.style.display = "none";
+      qr_box.classList.remove("hide");
+    }, 400);
+  }
+}
 
 function generateQR() {
   const text = input.value.trim();
-  if (!text) return;
+  if (!text) {
+    hideQR();
+    return;
+  }
+  
+  clearTimeout(hideTimeout);
+  qr_box.classList.remove("hide");
 
   QRCode.toDataURL(text, {
     width: 300, 
@@ -28,6 +46,12 @@ function generateQR() {
 bouton.addEventListener("click", generateQR);
 colorDark.addEventListener("input", generateQR);
 colorLight.addEventListener("input", generateQR);
+
+input.addEventListener("input", () => {
+  if (!input.value.trim()) {
+    hideQR();
+  }
+});
 
 function showToast(message) {
   const toast = document.getElementById("toast");
