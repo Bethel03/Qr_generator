@@ -12,6 +12,11 @@
     <p class="subtitle">Encode ton message</p>
     
     <input type="text" id="qr-input" placeholder="Entre ton texte ou URL">
+    
+    <div class="color-pickers">
+      <label>QR: <input type="color" id="color-dark" value="#000000"></label>
+      <label>Fond: <input type="color" id="color-light" value="#ffffff"></label>
+    </div>
     <button id="generate-btn">GENERER</button>
     
     <div class="qr-box" id="qr-box">
@@ -19,7 +24,6 @@
         <div class="qr-actions">
         <button id="copy-btn">COPY</button>
         <button id="download-btn">DOWNLOAD</button>
-        <button id="bw-btn">B & W</button>
         </div>
         <div id="toast" class="toast"></div>
     </div>

@@ -5,9 +5,10 @@ const image = document.getElementById("canvas");
 const qr_box = document.getElementById("qr-box");
 const copyBtn = document.getElementById("copy-btn");
 const downloadBtn = document.getElementById("download-btn");
+const colorDark = document.getElementById("color-dark");
+const colorLight = document.getElementById("color-light");
 
-
-bouton.addEventListener("click", () => {
+function generateQR() {
   const text = input.value.trim();
   if (!text) return;
 
@@ -15,14 +16,18 @@ bouton.addEventListener("click", () => {
     width: 300, 
     margin: 2,
     color: {
-      dark: "#00ffff",
-      light: "#000000"
+      dark: colorDark.value,
+      light: colorLight.value
     }
   }).then(dataURL => {
     image.src = dataURL;
     qr_box.style.display = "block";
   }).catch(err => console.error(err));
-});
+}
+
+bouton.addEventListener("click", generateQR);
+colorDark.addEventListener("input", generateQR);
+colorLight.addEventListener("input", generateQR);
 
 function showToast(message) {
   const toast = document.getElementById("toast");
@@ -56,25 +61,4 @@ downloadBtn.addEventListener("click", () => {
   link.href = image.src;
   link.download = "qrcode.png";
   link.click();
-});
-
-// Rendre en Noir et Blanc
-const bwBtn = document.getElementById("bw-btn");
-
-bwBtn.addEventListener("click", () => {
-  const text = input.value.trim();
-  if (!text) return;
-
-  QRCode.toDataURL(text, {
-    width: 300,
-    margin: 2,
-    color: {
-      dark: "#000000",  
-      light: "#ffffff"  
-    }
-  }).then(dataURL => {
-    image.src = dataURL;
-    qr_box.style.display = "block";
-    showToast("🎨 QR code en noir & blanc !");
-  }).catch(err => console.error(err));
 });
